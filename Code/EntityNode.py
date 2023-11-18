@@ -2,8 +2,10 @@ from graph_tool.all import *
 
 # Class representing entities governing data in the graph
 class EntityNode:
-    def __init__(self, id, name, graph):
-        self.id = id
+    def __init__(self, name, dggraph):
         self.name = name
-        self.vertex = graph.add_vertex()
-        self.graph = graph
+        self.vertex = dggraph.graph.add_vertex()
+        self.dggraph = dggraph
+
+        self.dggraph.node_names[self.vertex] = name
+        self.dggraph.nodes[name] = self

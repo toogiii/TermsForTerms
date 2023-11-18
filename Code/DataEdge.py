@@ -1,8 +1,10 @@
 from graph_tool.all import *
 
 class DataEdge:
-    def __init__(self, source, dest, rights, releases, graph):
-        self.edge = graph.add_edge(source, dest)
+    def __init__(self, source, dest, rights, releases, dggraph):
+        self.edge = dggraph.graph.add_edge(source, dest)
         self.rights = rights
         self.releases = releases
-        self.graph = graph
+        dggraph.edge_rights[self.edge] = rights
+        dggraph.edge_releases[self.edge] = releases
+        self.dggraph = dggraph
