@@ -1,11 +1,9 @@
 from graph_tool.all import *
 
-# Class representing entities governing data in the graph
+# Abstract class representing entities governing data in the graph
 class EntityNode:
     def __init__(self, name, dggraph):
+        # Name, graph, and vertex instantiation
         self.name = name
         self.dggraph = dggraph
-
-        self.vertex = self.dggraph.graph.add_vertex()
-        self.dggraph.node_names[self.vertex] = name
-        self.dggraph.nodes[self.vertex] = self
+        self.dggraph.add_node(self.name)

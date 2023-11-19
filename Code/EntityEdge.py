@@ -1,5 +1,6 @@
 from graph_tool.all import *
 
+# Abstract entity edge class for edges between any two entities
 class EntityEdge:
     def __init__(self, source_vertex, dest_vertex, props, dggraph):
         self.dggraph = dggraph
