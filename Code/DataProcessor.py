@@ -3,35 +3,27 @@ from EntityNode import EntityNode
 
 # Represents Data Processor
 class DataProcessor(EntityNode):
-    def __init__(self, name, processed, processed_data, dggraph):
+    def __init__(self, name, dggraph):
         self.name = name
-        self.processed = processed
-        self.processed_data = processed_data
         self.dggraph = dggraph
+        self.vertex = self.dggraph.add_node(self.name)
 
-        self.vertex = dggraph.graph.add_vertex()
-        self.dggraph.node_names[self.vertex] = name
-        self.dggraph.nodes[self.name] = self
-        
+        self.controllers = set()
+        self.controllers_edges = set()
+        self.processed = set()
         self.processed_edges = set()
-        self.processed_data_edges = set()
+
+    def add_controller(self, controller):
+        controllers_edge = controller.add_controlled_processor(self)
+        self.controllers.add(controller)
+        self.controllers_edges.add(controllers_edge)
         
-        for controller in self.processed:
-            self.processed_edges.add(self.dggraph.graph.add_edge(self.vertex, controller.vertex))
-
-        for datum in processed_data:
-            new_edge = DataEdge(self.vertex, datum.vertex, set(), datum.releases, self.dggraph)
-            self.processed_data_edges.add(new_edge)
-
-    def add_processed(self, controllers):
-        for controller in controllers:
-            if controller not in self.processed:
-                self.processed.add(controller)
-                self.processed_edges.add(self.dggraph.graph.add_edge(controller.vertex, self.vertex))
-
-    def add_processed_data(self, data):
-        for datum in data:
-            if data not in self.processed_data:
-                self.processed_data.add(datum)
-                new_edge = DataEdge(self.vertex, datum.vertex, datum.rights, datum.releases, self.dggraph)
-                self.processed_data_edges.add(new_edge)
+    def add_processed(self, datum):
+        if datum in self.processed:
+            raise Exception("Duplicate datum.")
+        
+        p_releases = list(datum.p_releases).insert(0, "Processes")
+        datum_edge = DataEdge(self.vertex, datum.vertex, p_releases, self.dggraph)
+        self.processed.add(datum)
+        self.processed_edges.add(datum_edge)
+        return datum_edge

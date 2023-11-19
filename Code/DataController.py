@@ -1,26 +1,32 @@
 from DataEdge import DataEdge
+from PCEdge import PCEdge
 from EntityNode import EntityNode
 
 # Represents Data Controller
 class DataController(EntityNode):
-    def __init__(self, name, controlled, dggraph):
+    def __init__(self, name, dggraph):
         self.name = name
-        self.controlled = controlled
         self.dggraph = dggraph
+        self.vertex = self.dggraph.add_node(self.name)
 
-        self.vertex = dggraph.graph.add_vertex()
-        self.dggraph.node_names[self.vertex] = name
-        self.dggraph.nodes[self.name] = self
-        
+        self.controlled = set()
         self.controlled_edges = set()
 
-        for datum in controlled:
-            new_edge = DataEdge(self.vertex, datum.vertex, datum.rights, datum.releases, self.dggraph)
-            self.controlled_edges.add(new_edge)
+    def add_controlled_data(self, datum):
+        if datum in self.controlled:
+            raise Exception("Duplicate datum.")
+        
+        c_releases = list(datum.c_releases).insert(0, "Controls")
+        datum_edge = DataEdge(self.vertex, datum.vertex, c_releases, self.dggraph)
+        self.controlled.add(datum)
+        self.controlled_edges.add(datum_edge)
+        return datum_edge
 
-    def add_controlled(self, data):
-        for datum in data:
-            if datum not in self.controlled:
-                self.controlled.add(datum)
-                new_edge = DataEdge(self.vertex, datum.vertex, datum.rights, datum.releases, self.dggraph)
-                self.controlled_edges.add(new_edge)
+    def add_controlled_processor(self, processor):
+        if processor in self.controlled:
+            raise Exception("Duplicate processor.")
+        
+        processor_edge = PCEdge(self.vertex, processor.vertex, ["Sends data to"], self.dggraph)
+        self.controlled.add(processor)
+        self.controlled_edges.add(processor_edge)
+        return processor_edge

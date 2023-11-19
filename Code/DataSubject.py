@@ -3,24 +3,20 @@ from EntityNode import EntityNode
 
 # Represents Data Subject
 class DataSubject(EntityNode):
-    def __init__(self, name, owned, dggraph):
+    def __init__(self, name, dggraph):
         self.name = name
-        self.owned = owned
         self.dggraph = dggraph
+        self.vertex = self.dggraph.add_node(self.name)
 
-        self.vertex = dggraph.graph.add_vertex()
-        self.dggraph.node_names[self.vertex] = name
-        self.dggraph.nodes[self.name] = self
-
+        self.owned = set()
         self.owned_edges = set()
 
-        for datum in owned:
-            new_edge = DataEdge(self.vertex, datum.vertex, datum.rights, datum.releases, self.dggraph)
-            self.owned_edges.add(new_edge)
-
-    def add_owned(self, data):
-        for datum in data:
-            if datum not in self.owned:
-                self.owned.add(datum)
-                new_edge = DataEdge(self.vertex, datum.vertex, datum.rights, datum.releases, self.dggraph)
-                self.owned_edges.add(new_edge)
+    def add_owned(self, datum):
+        if datum in self.owned:
+            raise Exception("Duplicate datum.")
+        
+        rights = list(datum.rights).insert(0, "Owns")
+        datum_edge = DataEdge(self.vertex, datum.vertex, rights, self.dggraph)
+        self.owned.add(datum)
+        self.owned_edges.add(datum_edge)
+        return datum_edge

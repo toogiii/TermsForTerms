@@ -1,0 +1,11 @@
+<Title>
+Purpose Statement: <description>
+
+Subjects: <Subjects>
+Controller: <Subjects>
+Processors: <Processors>
+
+Data: <Data (comma delimited for data with same properties)> is
+    owned by <Subject(s)> with rights to <rights>.
+    controlled by <Controller(s)> under conditions of <c_releases>.
+    processed by <Processor(s)> under conditions of <p_releases>.
