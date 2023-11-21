@@ -6,7 +6,7 @@ class Datum(EntityNode):
         # Name, graph, vertex instantiation
         self.name = name
         self.dggraph = dggraph
-        self.vertex = self.dggraph.add_node(self.name)
+        self.vertex = self.dggraph.add_node(self.name, type(self))
 
         # User rights and conditions on controlling and processing
         self.rights = set()
@@ -24,15 +24,15 @@ class Datum(EntityNode):
 
     # Add user rights over data to the data
     def add_rights(self, rights):
-        self.rights.union(rights)
+        self.rights = self.rights.union(rights)
 
     # Add controller conditions over data
     def add_c_releases(self, c_releases):
-        self.c_releases.union(c_releases)
+        self.c_releases = self.c_releases.union(c_releases)
     
     # Add processor conditions over data
     def add_p_releases(self, p_releases):
-        self.p_releases.union(p_releases)
+        self.p_releases = self.p_releases.union(p_releases)
 
     # Assign existing owner to data
     def add_owner(self, owner):
@@ -42,7 +42,7 @@ class Datum(EntityNode):
 
     # Assign controller to data
     def add_controller(self, controller):
-        new_edge = controller.add_controlled(self)
+        new_edge = controller.add_controlled_datum(self)
         self.controllers.add(controller)
         self.controller_edges.add(new_edge)
 

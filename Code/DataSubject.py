@@ -8,7 +8,7 @@ class DataSubject(EntityNode):
         # Name, graph, vertex instantiation
         self.name = name
         self.dggraph = dggraph
-        self.vertex = self.dggraph.add_node(self.name)
+        self.vertex = self.dggraph.add_node(self.name, type(self))
 
         self.owned = set()
         self.owned_edges = set()
@@ -19,8 +19,7 @@ class DataSubject(EntityNode):
             raise Exception("Duplicate datum.")
         
         # Rights represent users rights over their data as specified in a given document
-        rights = list(datum.rights).insert(0, "Owns")
-        datum_edge = DataEdge(self.vertex, datum.vertex, rights, self.dggraph)
+        datum_edge = DataEdge(self.vertex, datum.vertex, datum.rights, self.dggraph)
         self.owned.add(datum)
         self.owned_edges.add(datum_edge)
         return datum_edge

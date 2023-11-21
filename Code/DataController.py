@@ -9,19 +9,18 @@ class DataController(EntityNode):
         # Add name, graph, and instantiate node
         self.name = name
         self.dggraph = dggraph
-        self.vertex = self.dggraph.add_node(self.name)
+        self.vertex = self.dggraph.add_node(self.name, type(self))
 
         self.controlled = set()
         self.controlled_edges = set()
 
     # Add data that this body controls.
-    def add_controlled_data(self, datum):
+    def add_controlled_datum(self, datum):
         if datum in self.controlled:
             raise Exception("Duplicate datum.")
         
         # Create edge with text in c_releases and add
-        c_releases = list(datum.c_releases).insert(0, "Controls")
-        datum_edge = DataEdge(self.vertex, datum.vertex, c_releases, self.dggraph)
+        datum_edge = DataEdge(self.vertex, datum.vertex, datum.c_releases, self.dggraph)
         self.controlled.add(datum)
         self.controlled_edges.add(datum_edge)
         return datum_edge
@@ -32,7 +31,7 @@ class DataController(EntityNode):
             raise Exception("Duplicate processor.")
         
         # Create edge with companion processor
-        processor_edge = PCEdge(self.vertex, processor.vertex, ["Sends data to"], self.dggraph)
+        processor_edge = PCEdge(self.vertex, processor.vertex, ["contract"], self.dggraph)
         self.controlled.add(processor)
         self.controlled_edges.add(processor_edge)
         return processor_edge

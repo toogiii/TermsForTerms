@@ -84,7 +84,7 @@ def establish_relationships(data_properties, subjects, controllers, processors, 
     return data_properties.keys()
 
 # Get and associate a datum with its owners and owner rights
-def get_owners(datum, subjects, expression, graph):
+def get_owners(datum, subjects, expression):
     rights = set(expression[expression.index(" with rights to ") + 16:].split(", "))
     datum.add_rights(rights)
 
@@ -94,7 +94,7 @@ def get_owners(datum, subjects, expression, graph):
         datum.add_owner(subject)
 
 # Get and associate a datum with its controllers and control conditions
-def get_controllers(datum, controllers, expression, graph):
+def get_controllers(datum, controllers, expression):
     c_releases = set(expression[expression.index(" under conditions of ") + 21:].split(", "))
     datum.add_c_releases(c_releases)
 
@@ -104,14 +104,14 @@ def get_controllers(datum, controllers, expression, graph):
         datum.add_controller(controller)
 
 # Get and associate a datum with its processors and processing conditions
-def get_processors(datum, processors, controllers, expression, graph):
+def get_processors(datum, processors, expression):
     p_releases = set(expression[expression.index(" under conditions of ") + 21:].split(", "))
     datum.add_p_releases(p_releases)
 
     processor_names = expression[expression.index("processed by ") + 13: expression.index(" under conditions of ")].split(", ")
 
     for name in processor_names:
-        processor = get_entity_with_name(name, processor)
+        processor = get_entity_with_name(name, processors)
         datum.add_processor(processor)
 
         # Associate the processors with all the controllers also associated with the data

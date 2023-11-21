@@ -6,4 +6,4 @@ class EntityNode:
         # Name, graph, and vertex instantiation
         self.name = name
         self.dggraph = dggraph
-        self.dggraph.add_node(self.name)
+        self.dggraph.add_node(self.name, type(self))
