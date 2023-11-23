@@ -13,7 +13,7 @@ class DGGraph:
         # For display: node names and properties that run along ownership/controllership/processorship edges
         self.node_names = self.graph.new_vp("string")
         self.node_rvals = self.graph.new_vp("int16_t")
-        self.edge_props = self.graph.new_ep("vector<string>")
+        self.edge_props = self.graph.new_ep("vector<vector<string>>")
         self.edge_strings = self.graph.new_ep("string")
 
         self.graph.vertex_properties["node names"] = self.node_names

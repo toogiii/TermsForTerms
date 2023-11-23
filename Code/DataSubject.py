@@ -10,6 +10,8 @@ class DataSubject(EntityNode):
         self.dggraph = dggraph
         self.vertex = self.dggraph.add_node(self.name, type(self))
 
+        self.other_entity = set()
+        self.other_entity_edges = set()
         self.owned = set()
         self.owned_edges = set()
 

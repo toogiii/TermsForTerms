@@ -6,6 +6,15 @@ Controller: <Subjects>
 Processors: <Processors>
 
 Data: <Data (comma delimited for data with same properties)> is
-    owned by <Subject(s)> with rights to <rights>.
-    controlled by <Controller(s)> under conditions of <c_releases>.
+    owned by <Subject(s)> with rights to 
+        <set of rights>.
+    controlled by <Controller(s)> under conditions of 
+        <set of conditions for data control>;
+        ...
+        <set of conditions for data control>.
     processed by <Processor(s)> under conditions of <p_releases>.
+        <set of conditions for data processing>;
+        ...
+        <set of conditions for data processing>.
+
+Please note that the sets of conditions governing data control/processing should contain elements such that only when all elements in a row are fulfilled is the data transit authorized.

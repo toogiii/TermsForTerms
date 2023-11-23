@@ -11,6 +11,8 @@ class DataProcessor(EntityNode):
         self.dggraph = dggraph
         self.vertex = self.dggraph.add_node(self.name, type(self))
 
+        self.other_entity = set()
+        self.other_entity_edges = set()
         self.controllers = set()
         self.controllers_edges = set()
         self.processed = set()

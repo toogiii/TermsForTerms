@@ -22,6 +22,9 @@ class Datum(EntityNode):
         self.processors = set()
         self.processor_edges = set()
 
+        self.other_entity = set()
+        self.other_entity_edges = set()
+
     # Add user rights over data to the data
     def add_rights(self, rights):
         self.rights = self.rights.union(rights)
