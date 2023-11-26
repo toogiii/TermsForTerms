@@ -24,31 +24,36 @@ customer_demog = Datum("Demographic Vector", ice_cream_network)
 customer_prefs = Datum("Ice Cream Preference", ice_cream_network)
 customer_n_per_week = Datum("Visits per Week", ice_cream_network)
 customer_dates = Datum("Dates of Visits", ice_cream_network)
-customer_data = [customer_personal, customer_demog, customer_prefs, customer_n_per_week, customer_dates]
+customer_data = [customer_personal,  customer_prefs, customer_n_per_week, customer_dates]
 
 employee_personal = Datum("Personal Info", ice_cream_network)
 employee_hours = Datum("Employee Hours Logged", ice_cream_network)
 employee_days_absent = Datum("Employee Absence", ice_cream_network)
 employee_data = [employee_personal, employee_hours, employee_days_absent]
 
-customer_rights = {"consent control", "accuracy", "security", "restriction of processing"}
-customer_c_releases = {"consent", "contractual obligation", "inform of details of processing"}
-customer_p_releases = {"transparency", "security", "contractual obligation", "legal obligation", "controller authorization", "controller compliance", "controller notification"}
+customer_s_props = {("consent control", "accuracy", "security", "restriction of processing")}
+customer_c_props = {("consent", "contractual obligation", "inform of details of processing")}
+customer_p_props = {("transparency", "security", "contractual obligation", "controller authorization", "controller compliance", "controller notification"), ("transparency", "security", "legal obligation")}
 
 for datum in customer_data:
-    datum.add_rights(customer_rights)
-    datum.add_c_releases(customer_c_releases)
-    datum.add_p_releases(customer_p_releases)
+    datum.add_s_props(customer_s_props)
+    datum.add_c_props(customer_c_props)
+    datum.add_p_props(customer_p_props)
 
-customer_demog.add_rights({"necessity"})
-customer_demog.add_c_releases({"non-profit security"})
+customer_demog_s_props = {("consent control", "accuracy", "security", "restriction of processing", "necessity")}
+customer_demog_c_props = {("consent", "contractual obligation", "inform of details of processing", "non-profit security")}
+customer_demog.add_s_props(customer_demog_s_props)
+customer_demog.add_c_props(customer_demog_c_props)
+customer_demog.add_p_props(customer_p_props)
 
-employee_rights = {"consent control", "accuracy", "security", "restriction of processing"}
-employee_c_releases = {"consent", "contractual obligation", "inform of details of processing"}
+employee_s_props = {("consent control", "accuracy", "security", "restriction of processing")}
+employee_c_props = {("consent", "contractual obligation", "inform of details of processing")}
 
 for datum in employee_data:
-    datum.add_rights(employee_rights)
-    datum.add_c_releases(employee_c_releases)
+    datum.add_s_props(employee_s_props)
+    datum.add_c_props(employee_c_props)
+
+customer_data.append(customer_demog)
 
 for datum in customer_data:
     datum.add_owner(customer)

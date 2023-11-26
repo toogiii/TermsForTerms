@@ -10,10 +10,13 @@ class DGGraph:
         self.name = name
         self.purpose = purpose
 
+        self.nodes = {}
+        self.edges = {}
+
         # For display: node names and properties that run along ownership/controllership/processorship edges
         self.node_names = self.graph.new_vp("string")
         self.node_rvals = self.graph.new_vp("int16_t")
-        self.edge_props = self.graph.new_ep("vector<vector<string>>")
+        self.edge_props = self.graph.new_ep("object")
         self.edge_strings = self.graph.new_ep("string")
 
         self.graph.vertex_properties["node names"] = self.node_names
@@ -22,9 +25,12 @@ class DGGraph:
         self.graph.edge_properties["edge strings"] = self.edge_strings
 
     # Add node to graph with unique vertex
-    def add_node(self, name, entity_type):
+    def add_node(self, entity):
         vertex = self.graph.add_vertex()
-        self.node_names[vertex] = name
+        entity_type = type(entity)
+        self.nodes[vertex] = entity
+        self.node_names[vertex] = entity.name
+
         if entity_type == DataSubject:
             self.node_rvals[vertex] = 0
         elif entity_type == Datum:
@@ -34,10 +40,14 @@ class DGGraph:
         return vertex
 
     # Add edge between entity nodes
-    def add_edge(self, source_vertex, dest_vertex, this_edge_props):
+    def add_edge(self, edge_obj, source_vertex, dest_vertex):
         edge = self.graph.add_edge(source_vertex, dest_vertex)
-        self.edge_props[edge] = this_edge_props
+        self.edge_props[edge] = edge_obj.props
+        self.edges[edge] = edge_obj
         return edge
+    
+    def get_edge_string(self, edge):
+        return "\n\t" + "\n\t".join([", ".join(i) for i in self.edge_props[edge]]) + "\n"
 
     # Draw graph
     def render_graph(self, 
@@ -53,7 +63,7 @@ class DGGraph:
 
         # Get properties
         for edge in self.graph.edges():
-            prop_string = ", ".join(self.edge_props[edge])
+            prop_string = self.get_edge_string(edge)
             if prop_string in edge_groups.values():
                 prop_val = 0
                 for key, value in edge_groups.items():
@@ -72,7 +82,7 @@ class DGGraph:
             legend_filename = filepath[:filepath.rfind(".")] + "_legend.txt"
         with open(legend_filename, "w") as file:
             for key in edge_groups.keys():
-                text = "Property " + str(key) + ": " + edge_groups[key] + "\n"
+                text = "Property " + str(key) + ": " + edge_groups[key]
                 file.write(text)
             file.close()
 

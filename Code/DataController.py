@@ -9,8 +9,8 @@ class DataController(EntityNode):
         # Add name, graph, and instantiate node
         self.name = name
         self.dggraph = dggraph
-        self.vertex = self.dggraph.add_node(self.name, type(self))
-
+        self.vertex = self.dggraph.add_node(self)
+        
         self.other_entity = set()
         self.other_entity_edges = set()
         self.controlled = set()
@@ -22,7 +22,7 @@ class DataController(EntityNode):
             raise Exception("Duplicate datum.")
         
         # Create edge with text in c_releases and add
-        datum_edge = DataEdge(self.vertex, datum.vertex, datum.c_releases, self.dggraph)
+        datum_edge = DataEdge(self.vertex, datum.vertex, datum.c_props, self.dggraph)
         self.controlled.add(datum)
         self.controlled_edges.add(datum_edge)
         return datum_edge
@@ -33,7 +33,7 @@ class DataController(EntityNode):
             raise Exception("Duplicate processor.")
         
         # Create edge with companion processor
-        processor_edge = PCEdge(self.vertex, processor.vertex, ["contract"], self.dggraph)
+        processor_edge = PCEdge(self.vertex, processor.vertex, [{"contract"}], self.dggraph)
         self.controlled.add(processor)
         self.controlled_edges.add(processor_edge)
         return processor_edge

@@ -9,13 +9,13 @@ class EntityNode:
         self.dggraph = dggraph
         self.other_entity = set()
         self.other_entity_edges = set()
-        self.vertex = self.dggraph.add_node(self.name, type(self))
+        self.vertex = self.dggraph.add_node(self)
 
-    def connect(self, other_ent, label_set):
+    def connect(self, other_ent, props):
         if other_ent in self.other_entity:
             raise Exception("Duplicate edge.")
         
-        edge = EntityEdge(self.vertex, other_ent.vertex, label_set, self.dggraph)
+        edge = EntityEdge(self.vertex, other_ent.vertex, props, self.dggraph)
         self.other_entity.add(other_ent)
         self.other_entity_edges.add(edge)
         other_ent.other_entity.add(self)

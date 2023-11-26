@@ -12,7 +12,7 @@ Data: <Data (comma delimited for data with same properties)> is
         <set of conditions for data control>;
         ...
         <set of conditions for data control>.
-    processed by <Processor(s)> under conditions of <p_releases>.
+    processed by <Processor(s)> under conditions of 
         <set of conditions for data processing>;
         ...
         <set of conditions for data processing>.

@@ -1,4 +1,7 @@
 from EntityNode import EntityNode
+from DataSubject import DataSubject
+from DataController import DataController
+from DataProcessor import DataProcessor
 
 # Class representing data nodes in the graph
 class Datum(EntityNode):
@@ -6,12 +9,12 @@ class Datum(EntityNode):
         # Name, graph, vertex instantiation
         self.name = name
         self.dggraph = dggraph
-        self.vertex = self.dggraph.add_node(self.name, type(self))
+        self.vertex = self.dggraph.add_node(self)
 
         # User rights and conditions on controlling and processing
-        self.rights = set()
-        self.c_releases = set()
-        self.p_releases = set()
+        self.s_props = set()
+        self.c_props = set()
+        self.p_props = set()
 
         self.owners = set()
         self.owner_edges = set()
@@ -25,18 +28,18 @@ class Datum(EntityNode):
         self.other_entity = set()
         self.other_entity_edges = set()
 
-    # Add user rights over data to the data
-    def add_rights(self, rights):
-        self.rights = self.rights.union(rights)
+    # Add subject properties to the data
+    def add_s_props(self, props):
+        self.s_props = self.s_props.union(props)
 
-    # Add controller conditions over data
-    def add_c_releases(self, c_releases):
-        self.c_releases = self.c_releases.union(c_releases)
+    # Add controller properties to the data
+    def add_c_props(self, props):
+        self.c_props = self.c_props.union(props)
+
+    # Add processor properties to the data
+    def add_p_props(self, props):
+        self.p_props = self.p_props.union(props)
     
-    # Add processor conditions over data
-    def add_p_releases(self, p_releases):
-        self.p_releases = self.p_releases.union(p_releases)
-
     # Assign existing owner to data
     def add_owner(self, owner):
         new_edge = owner.add_owned(self)

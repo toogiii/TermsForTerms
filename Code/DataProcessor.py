@@ -9,7 +9,7 @@ class DataProcessor(EntityNode):
         # Name, graph, and instantiate node
         self.name = name
         self.dggraph = dggraph
-        self.vertex = self.dggraph.add_node(self.name, type(self))
+        self.vertex = self.dggraph.add_node(self)
 
         self.other_entity = set()
         self.other_entity_edges = set()
@@ -32,7 +32,7 @@ class DataProcessor(EntityNode):
             raise Exception("Duplicate datum.")
         
         # Create edge with p_releases, which represents conditions/responsibilities on processing
-        datum_edge = DataEdge(self.vertex, datum.vertex, datum.p_releases, self.dggraph)
+        datum_edge = DataEdge(self.vertex, datum.vertex, datum.p_props, self.dggraph)
         self.processed.add(datum)
         self.processed_edges.add(datum_edge)
         return datum_edge

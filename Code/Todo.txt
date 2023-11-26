@@ -1,0 +1,8 @@
+Todo: 
+    Evaluate/debug merge
+    Evaluate/debug compare
+    Rewrite parser
+    Rewrite GDPR implementation
+    Validate parser against abridged test/gdpr
+    Write Examples
+    Prepare presentation
