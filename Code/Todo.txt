@@ -6,3 +6,4 @@ Todo:
     Validate parser against abridged test/gdpr
     Write Examples
     Prepare presentation
+    SHARE WITH MALTE!!
