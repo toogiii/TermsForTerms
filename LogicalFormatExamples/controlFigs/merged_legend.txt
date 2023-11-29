@@ -1,0 +1,13 @@
+Property 1: 
+	consent control, accuracy, security, restriction of processing
+Property 2: 
+	consent control, accuracy, security, restriction of processing, necessity
+Property 3: 
+	transparency, security, contractual obligation, controller authorization, controller compliance, controller notification
+	transparency, security, legal obligation
+Property 4: 
+	contract
+Property 5: 
+	consent, contractual obligation, inform of details of processing
+Property 6: 
+	consent, contractual obligation, inform of details of processing, non-profit security

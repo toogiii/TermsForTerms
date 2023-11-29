@@ -20,8 +20,9 @@ class DataProcessor(EntityNode):
 
     # Add companion controller
     def add_controller(self, controller):
-
         # Have controller node add processor edge, then add controller.
+        if controller in self.controllers:
+            return
         controllers_edge = controller.add_controlled_processor(self)
         self.controllers.add(controller)
         self.controllers_edges.add(controllers_edge)

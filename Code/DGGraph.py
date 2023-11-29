@@ -49,6 +49,12 @@ class DGGraph:
     def get_edge_string(self, edge):
         return "\n\t" + "\n\t".join([", ".join(i) for i in self.edge_props[edge]]) + "\n"
 
+    def get_names(self):
+        names = set()
+        for node in self.nodes.values():
+            names.add(node.name)
+        return names
+
     # Draw graph
     def render_graph(self, 
                      output_size = None,

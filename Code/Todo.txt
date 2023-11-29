@@ -1,5 +1,4 @@
 Todo: 
-    Evaluate/debug merge
     Evaluate/debug compare
     Rewrite parser
     Rewrite GDPR implementation

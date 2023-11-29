@@ -42,18 +42,24 @@ class Datum(EntityNode):
     
     # Assign existing owner to data
     def add_owner(self, owner):
+        if owner in self.owners:
+            return
         new_edge = owner.add_owned(self)
         self.owners.add(owner)
         self.owner_edges.add(new_edge)
 
     # Assign controller to data
     def add_controller(self, controller):
+        if controller in self.controllers:
+            return
         new_edge = controller.add_controlled_datum(self)
         self.controllers.add(controller)
         self.controller_edges.add(new_edge)
 
     # Assign processor to data
     def add_processor(self, processor):
+        if processor in self.processors:
+            return
         new_edge = processor.add_processed(self)
         self.processors.add(processor)
         self.processor_edges.add(new_edge)

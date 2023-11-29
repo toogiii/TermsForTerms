@@ -3,6 +3,7 @@ from DataController import DataController
 from DataProcessor import DataProcessor
 from Datum import Datum
 from DGGraph import DGGraph
+from GraphCompare import *
 
 # Control Case 0: Example Proof of Concept
 # Here, we create a possible hypothetical for the users of an ice-cream store.
@@ -26,7 +27,7 @@ customer_n_per_week = Datum("Visits per Week", ice_cream_network)
 customer_dates = Datum("Dates of Visits", ice_cream_network)
 customer_data = [customer_personal,  customer_prefs, customer_n_per_week, customer_dates]
 
-employee_personal = Datum("Personal Info", ice_cream_network)
+employee_personal = Datum("Employee Personal Info", ice_cream_network)
 employee_hours = Datum("Employee Hours Logged", ice_cream_network)
 employee_days_absent = Datum("Employee Absence", ice_cream_network)
 employee_data = [employee_personal, employee_hours, employee_days_absent]
@@ -66,4 +67,35 @@ for datum in employee_data:
     datum.add_controller(alice)
 
 ice_cream_network.render_graph(output_size = (2000, 2000),
-                        filepath = "/Users/gsgaur/Documents/GitHub/TermsForTerms/abridged_example.png")
+                        filepath = "../LogicalFormatExamples/controlFigs/alice.png")
+
+franchise_network = DGGraph("Ice Cream Parlor's Inc.", "Analyzing relationships between the larger company and Alice's employees")
+
+franchise_owner = DataController("Company", franchise_network)
+employee_fr = DataSubject("Employee", franchise_network)
+other_franchises = DataSubject("Other Franchises", franchise_network)
+
+employee_fr_hours = Datum("Employee Hours Logged", franchise_network)
+employee_fr_days_absent = Datum("Employee Absence", franchise_network)
+employee_fr_data = [employee_fr_hours, employee_fr_days_absent]
+
+other_franchise_data = Datum("Other Franchise Data", franchise_network)
+
+for datum in employee_fr_data:
+    datum.add_s_props(employee_s_props)
+    datum.add_c_props(employee_c_props)
+    datum.add_owner(employee_fr)
+    datum.add_controller(franchise_owner)
+
+other_franchise_data.add_s_props(customer_s_props)
+other_franchise_data.add_c_props(customer_c_props)
+other_franchise_data.add_owner(other_franchises)
+other_franchise_data.add_controller(franchise_owner)
+
+franchise_network.render_graph(output_size = (2000, 2000),
+                        filepath = "../LogicalFormatExamples/controlFigs/company.png")
+
+merged = graph_merge(ice_cream_network, franchise_network)
+
+merged.render_graph(output_size = (2000, 2000),
+                        filepath = "../LogicalFormatExamples/controlFigs/merged.png")
