@@ -66,7 +66,9 @@ for datum in employee_data:
     datum.add_owner(employee)
     datum.add_controller(alice)
 
-ice_cream_network.render_graph(output_size = (2000, 2000),
+ice_cream_network.render_graph(output_size = (2000, 1200),
+                        vertex_font_size=20,
+                        edge_font_size=20,                               
                         filepath = "../LogicalFormatExamples/controlFigs/alice.png")
 
 franchise_network = DGGraph("Ice Cream Parlor's Inc.", "Analyzing relationships between the larger company and Alice's employees")
@@ -92,10 +94,12 @@ other_franchise_data.add_c_props(customer_c_props)
 other_franchise_data.add_owner(other_franchises)
 other_franchise_data.add_controller(franchise_owner)
 
-franchise_network.render_graph(output_size = (2000, 2000),
+franchise_network.render_graph(output_size = (2000, 1200),
+                        vertex_font_size=20,
+                        edge_font_size=20,
                         filepath = "../LogicalFormatExamples/controlFigs/company.png")
 
 merged = graph_merge(ice_cream_network, franchise_network)
 
-merged.render_graph(output_size = (2000, 2000),
-                        filepath = "../LogicalFormatExamples/controlFigs/merged.png")
+merged.render_graph(output_size = (2500, 1500),
+                    filepath = "../LogicalFormatExamples/controlFigs/merged.png")
