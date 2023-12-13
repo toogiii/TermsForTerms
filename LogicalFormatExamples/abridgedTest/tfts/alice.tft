@@ -1,0 +1,32 @@
+Alice's Ice Cream Parlor 
+Purpose Statement: Analyzing relationships between entities that interact with Alice's Ice Cream Parlor
+
+Subjects: Customer, Employee
+Controller: Alice
+Processors: AWS, Other Customers
+
+Processor-Controllers: AWS, Other Customers are controlled by Alice.
+
+Data: Personal Info, Ice Cream Preference, Visits per Week, Dates of Visits are
+    owned by Customer with rights to
+        consent control, accuracy, security, restriction of processing.
+    controlled by Alice under conditions of
+        consent, contractual obligation, inform subject of details of processing.
+    processed by AWS, Other Customers under conditions of 
+        transparency, security, contractual obligation, controller authorization, controller compliance, controller notification;
+        transparency, security, legal obligation.
+
+Data: Demographic Vector are
+    owned by Customer with rights to 
+        consent control, accuracy, security, restriction of processing, necessity.
+    controlled by Alice under conditions of
+        consent, contractual obligation, inform subject of details of processing, non-profit security.
+    processed by AWS, Other Customers under conditions of 
+        transparency, security, contractual obligation, controller authorization, controller compliance, controller notification;
+        transparency, security, legal obligation.
+
+Data: Employee Personal Info, Employee Hours Logged, Employee Absence are
+    owned by Employee with rights to
+        consent control, accuracy, security, restriction of processing.
+    controlled by Alice under conditions of 
+        consent, contractual obligation, inform subject of details of processing.

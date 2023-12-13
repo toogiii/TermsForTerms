@@ -1,4 +1,0 @@
-Property 1: 
-	consent, contractual obligation, inform of details of processing
-Property 2: 
-	consent control, accuracy, security, restriction of processing

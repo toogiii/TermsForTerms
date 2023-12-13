@@ -1,7 +1,10 @@
 GDPR Graph
 Purpose Statement: This graph represents the provisions for data governing entities outlined in the GDPR.
 
-Subjects: Data Subject
+Subjects: Data Subject, Child Subject
 Controllers: Data Controller
 Processors: Data Processor
 
+Processor-Controllers: Data Controller are controlled by Data Processor.
+
+Data: 

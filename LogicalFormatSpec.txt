@@ -2,10 +2,12 @@
 Purpose Statement: <description>
 
 Subjects: <Subjects>
-Controller: <Subjects>
+Controller: <Controllers>
 Processors: <Processors>
 
-Data: <Data (comma delimited for data with same properties)> is
+Processor-Controllers: <Processors> are controlled by <Controllers>.
+
+Data: <Data (comma delimited for data with same properties)> are
     owned by <Subject(s)> with rights to 
         <set of rights>.
     controlled by <Controller(s)> under conditions of 

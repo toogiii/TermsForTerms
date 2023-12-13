@@ -1,0 +1,24 @@
+Ice Cream Parlors Inc. 
+Purpose Statement: Analyzing relationships between the larger company and Alice's employees
+
+Subjects: Employee, Other Franchises
+Controller: Company
+Processors: Payroll Processor
+
+Processor-Controllers: Payroll Processor are controlled by Company.
+
+Data: Employee Hours Logged, Employee Absence are
+    owned by Employee with rights to 
+        consent control, accuracy, security, restriction of processing.
+    controlled by Company under conditions of 
+        consent, contractual obligation, inform subject of details of processing.
+    processed by Payroll Processor under conditions of 
+        transparency, security, contractual obligation, controller authorization, controller compliance, controller notification;
+        legal obligation, security.
+
+
+Data: Other Franchise Data are
+    owned by Other Franchises with rights to
+        consent control, accuracy, security, restriction of processing.
+    controlled by Company under conditions of
+        consent, contractual obligation, inform subject of details of processing.

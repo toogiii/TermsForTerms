@@ -1,0 +1,17 @@
+Ice Cream Policy
+Purpose Statement: To represent regulation for companies and their employees.
+
+Subjects: Employee
+Controller: Corporation
+Processors: Payor
+
+Processor-Controllers: Payor are controlled by Corporation.
+
+Data: Employee Data are:
+    owned by Employee with rights to
+        consent control, accuracy, security, restriction of processing, necessity, confidentiality.
+    controlled by Corporation under conditions of
+        consent, contractual obligation.
+    processed by Payor under conditions of
+        transparency, security, contractual obligation, controller authorization, controller compliance, controller notification;
+        legal obligation, public health obligation, security.

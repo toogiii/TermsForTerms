@@ -7,12 +7,13 @@ from DataProcessor import DataProcessor
 
 # This function should be able to compare abstract relationships defined between entities
 #   in policy to definitions at the terms and conditions level, find errors in the specification,
-#   and return those errors along with a suggested corrected graph (that satisfies compliance).
+#   and return those errors.
 def graph_compare(dgg_toc, dgg_pol, analogous_entity_map={}):
     # Identity mappings
-    for name in dgg_toc.node_names.values():
+    for entity in dgg_toc.nodes.values():
+        name = entity.name
         if name not in analogous_entity_map.keys():
-            analogous_entity_map[name] = name
+            analogous_entity_map[name] = [name]
 
     # Analyze all entity pairs
     errors = []
@@ -20,33 +21,49 @@ def graph_compare(dgg_toc, dgg_pol, analogous_entity_map={}):
         entity_toc = dgg_toc.nodes[v_toc]
         for v_pol in dgg_pol.graph.vertices():
             entity_pol = dgg_pol.nodes[v_pol]
-            if entity_pol.name == analogous_entity_map[entity_toc.name]:
+            if entity_pol.name in analogous_entity_map[entity_toc.name]:
                 edge_comps = get_analogous_edge_props(entity_toc, entity_pol, dgg_toc, dgg_pol, analogous_entity_map)
-                for vertices in edge_comps.keys():
-                    props = edge_comps[vertices]
-                    if not props[0].subset(props[1]):
-                        error_string = "The edge between " + dgg_toc.nodes[vertices[0]].name + " and " 
-                        error_string += dgg_toc.nodes[vertices[1]] + " has properties\n\t" + props[0]
-                        error_string += "in the first policy and properties\n\t" + props[1] + "\nin the other policy"
+                for vertex_names in edge_comps.keys():
+                    props_lists = edge_comps[vertex_names]
+                    non_compliant = is_compliant(props_lists[0], props_lists[1])
+                    if non_compliant != []:
+                        errors.append((vertex_names[0], vertex_names[1], non_compliant))
+
+    for error in errors:
+        print("The edge in " + dgg_toc.name + " between " + error[0] + " and " + error[1] + " has noncompliant property set")
+        print("\t", error[2][0][0], "\nthat does not encompass any of properties", sep="")
+        for prop in error[2][0][1]:
+            print("\t", prop, sep="")
+        print("as specified in "+ dgg_pol.name +".", end="\n\n")
+
     return errors
 
 # Check whether rights and releases on entity_pol are a subset of those specified in entity_toc (compliance)
+def is_compliant(props_list_toc, props_list_pol):
+    non_compliant = []
+                
+    for props_toc in props_list_toc:
+        compliant_set = False
+        for props_pol in props_list_pol:
+            if set(props_toc).issuperset(props_pol):
+                compliant_set = True
+        if not compliant_set:
+            non_compliant.append((props_toc, props_list_pol))
+    return non_compliant
+
 def get_analogous_edge_props(entity_toc, entity_pol, dgg_toc, dgg_pol, analogous_entity_map):
     v_toc = entity_toc.vertex
     v_pol = entity_pol.vertex
-    analogous_edge_props = []
+    analogous_edge_props = {}
     for e_toc, v_target_toc in zip(v_toc.in_edges(), v_toc.in_neighbors()):
         target_toc = dgg_toc.nodes[v_target_toc]
-        found = False
 
         for e_pol, v_target_pol in zip(v_pol.in_edges(), v_pol.in_neighbors()):
-            target_pol = dgg_toc.nodes[v_target_pol]
-            if target_pol.name == analogous_entity_map[target_toc.name]:
-                found = True
-                analogous_edge_props[(v_toc, v_pol)] = (dgg_toc.graph.edge_props[e_toc], dgg_pol.graph.edge_props[e_pol])
+            target_pol = dgg_pol.nodes[v_target_pol]
+            if target_pol.name in analogous_entity_map[target_toc.name]:
+                key = (entity_toc.name, target_toc.name, entity_pol.name, target_pol.name)
+                analogous_edge_props[key] = (dgg_toc.edge_props[e_toc], dgg_pol.edge_props[e_pol])
 
-        if not found:
-            raise Exception("No analog in second policy for edge between " + target_toc.name + " and " + entity_toc.name + ".")
     return analogous_edge_props
 
 # This function should be able to take specifications from two different entities

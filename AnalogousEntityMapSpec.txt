@@ -1,3 +1,0 @@
-<Entity Name>: <Analogous Entity Names (comma separated)>
-
-Note: Names that map one-to-one to themselves do not need to be included, as they are filled in.
