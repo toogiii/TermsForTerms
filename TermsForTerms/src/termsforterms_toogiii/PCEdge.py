@@ -1,4 +1,3 @@
-from graph_tool.all import *
 from EntityEdge import EntityEdge
 
 # Class representing an edge between a processor and controller.

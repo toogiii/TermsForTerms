@@ -3,55 +3,69 @@ from DataController import DataController
 from DataProcessor import DataProcessor
 from Datum import Datum
 from DGGraph import DGGraph
-from GraphCompare import *
+from GraphCompare import graph_compare, graph_merge
 from ParseIntoGraph import parse_format
 
-# Control Case 0: Example Proof of Concept
-# Here, we create a possible hypothetical for the users of an ice-cream store.
-#   This will likely be used for the writeup.
+# Abridged Tests: Graph, Merge, and Compare with Toy Examples
 
-ice_cream_network = DGGraph("Alice's Ice Cream Parlor", "Analyzing relationships between entities that interact with Alice's Ice Cream Parlor.")
+# Control: Create network for Alice's ice cream shop
+alice_graph = DGGraph("Alice's Ice Cream Parlor",
+    "Analyzing relationships between entities that interact with Alice's Ice Cream Parlor.")
 
-customer = DataSubject("Customer", ice_cream_network)
-employee = DataSubject("Employee", ice_cream_network)
-other_customers = DataProcessor("Other Customers", ice_cream_network)
-aws = DataProcessor("AWS", ice_cream_network)
-alice = DataController("Alice", ice_cream_network)
+# Entities in this network
+customer = DataSubject("Customer", alice_graph)
+employee = DataSubject("Employee", alice_graph)
+other_customers = DataProcessor("Other Customers", alice_graph)
+aws = DataProcessor("AWS", alice_graph)
+alice = DataController("Alice", alice_graph)
 
 other_customers.add_controller(alice)
 aws.add_controller(alice)
 
-customer_personal = Datum("Personal Info", ice_cream_network)
-customer_demog = Datum("Demographic Vector", ice_cream_network)
-customer_prefs = Datum("Ice Cream Preference", ice_cream_network)
-customer_n_per_week = Datum("Visits per Week", ice_cream_network)
-customer_dates = Datum("Dates of Visits", ice_cream_network)
+# Data
+customer_personal = Datum("Personal Info", alice_graph)
+customer_demog = Datum("Demographic Vector", alice_graph)
+customer_prefs = Datum("Ice Cream Preference", alice_graph)
+customer_n_per_week = Datum("Visits per Week", alice_graph)
+customer_dates = Datum("Dates of Visits", alice_graph)
 customer_data = [customer_personal,  customer_prefs, customer_n_per_week, customer_dates]
 
-employee_personal = Datum("Employee Personal Info", ice_cream_network)
-employee_hours = Datum("Employee Hours Logged", ice_cream_network)
-employee_days_absent = Datum("Employee Absence", ice_cream_network)
+employee_personal = Datum("Employee Personal Info", alice_graph)
+employee_hours = Datum("Employee Hours Logged", alice_graph)
+employee_days_absent = Datum("Employee Absence", alice_graph)
 employee_data = [employee_personal, employee_hours, employee_days_absent]
 
+# Customer data properties
 customer_s_props = {("consent control", "accuracy", "security", "restriction of processing")}
-customer_c_props = {("consent", "contractual obligation", "inform subject of details of processing")}
-customer_p_props = {("transparency", "security", "contractual obligation", "controller authorization", "controller compliance", "controller notification"), ("transparency", "security", "legal obligation")}
+customer_c_props = {("consent", "contractual obligation",
+    "inform subject of details of processing")}
+customer_p_props = {("transparency", "security", "contractual obligation",
+    "controller authorization", "controller compliance", "controller notification"), 
+    ("transparency", "security", "legal obligation")}
 
 for datum in customer_data:
     datum.add_s_props(customer_s_props)
     datum.add_c_props(customer_c_props)
     datum.add_p_props(customer_p_props)
 
-customer_demog_s_props = {("consent control", "accuracy", "security", "restriction of processing", "necessity")}
-customer_demog_c_props = {("consent", "contractual obligation", "inform subject of details of processing", "non-profit security")}
+# Demographic data properties (sensitive)
+customer_demog_s_props = {("consent control", "accuracy", "security",
+    "restriction of processing", "necessity")}
+customer_demog_c_props = {("consent", "contractual obligation",
+    "inform subject of details of processing", "non-profit security")}
 customer_demog.add_s_props(customer_demog_s_props)
 customer_demog.add_c_props(customer_demog_c_props)
 customer_demog.add_p_props(customer_p_props)
 
-employee_s_props = {("consent control", "accuracy", "security", "restriction of processing")}
-employee_c_props = {("consent", "contractual obligation", "inform subject of details of processing")}
-employee_p_props = {("transparency", "security", "contractual obligation", "controller authorization", "controller compliance", "controller notification"), ("legal obligation", "security")}
+employee_s_props = {("consent control", "accuracy", "security",
+    "restriction of processing")}
+employee_c_props = {("consent", "contractual obligation",
+    "inform subject of details of processing")}
+employee_p_props = {("transparency", "security", "contractual obligation", 
+    "controller authorization", "controller compliance", "controller notification"), 
+    ("legal obligation", "security")}
 
+# Add Ownership
 for datum in employee_data:
     datum.add_s_props(employee_s_props)
     datum.add_c_props(employee_c_props)
@@ -68,26 +82,32 @@ for datum in employee_data:
     datum.add_owner(employee)
     datum.add_controller(alice)
 
-ice_cream_network.render_graph(output_size = (2000, 1200),
+# Draw graph
+alice_graph.render_graph(output_size = (2000, 1200),
                         vertex_font_size=20,
-                        edge_font_size=20,                               
+                        edge_font_size=20,                              
                         filepath = "../LogicalFormatExamples/abridgedTest/control/alice.png")
 
-franchise_network = DGGraph("Ice Cream Parlor Inc.", "Analyzing relationships between the larger company and Alice's employees")
+# Control: Create network for franchiser's perspective
+franchise_graph = DGGraph("Ice Cream Parlor Inc.", 
+    "Analyzing relationships between the larger company and Alice's employees")
 
-franchise_owner = DataController("Company", franchise_network)
-employee_fr = DataSubject("Employee", franchise_network)
-other_franchises = DataSubject("Other Franchises", franchise_network)
-payroll_processor = DataProcessor("Payroll Processor", franchise_network)
+# Entities
+franchise_owner = DataController("Company", franchise_graph)
+employee_fr = DataSubject("Employee", franchise_graph)
+other_franchises = DataSubject("Other Franchises", franchise_graph)
+payroll_processor = DataProcessor("Payroll Processor", franchise_graph)
 
-employee_fr_hours = Datum("Employee Hours Logged", franchise_network)
-employee_fr_days_absent = Datum("Employee Absence", franchise_network)
+# Data
+employee_fr_hours = Datum("Employee Hours Logged", franchise_graph)
+employee_fr_days_absent = Datum("Employee Absence", franchise_graph)
 employee_fr_data = [employee_fr_hours, employee_fr_days_absent]
 
-other_franchise_data = Datum("Other Franchise Data", franchise_network)
+other_franchise_data = Datum("Other Franchise Data", franchise_graph)
 
 payroll_processor.add_controller(franchise_owner)
 
+# Use previous props
 for datum in employee_fr_data:
     datum.add_s_props(employee_s_props)
     datum.add_c_props(employee_c_props)
@@ -96,24 +116,31 @@ for datum in employee_fr_data:
     datum.add_controller(franchise_owner)
     datum.add_processor(payroll_processor)
 
+# Add ownership
 other_franchise_data.add_s_props(customer_s_props)
 other_franchise_data.add_c_props(customer_c_props)
 other_franchise_data.add_owner(other_franchises)
 other_franchise_data.add_controller(franchise_owner)
 
-franchise_network.render_graph(output_size = (2000, 1200),
+# Graph
+franchise_graph.render_graph(output_size = (2000, 1200),
                         vertex_font_size=20,
                         edge_font_size=20,
                         filepath = "../LogicalFormatExamples/abridgedTest/control/company.png")
 
-merged = graph_merge(ice_cream_network, franchise_network)
+
+# Merge franchiser and franchisee (Alice's) graphs
+merged = graph_merge(alice_graph, franchise_graph)
 
 merged.render_graph(output_size = (2500, 1500),
                     filepath = "../LogicalFormatExamples/abridgedTest/control/merged.png")
 
+# Evaluate generated graphs using .tfts against controls
 generated_alice = parse_format("../LogicalFormatExamples/abridgedTest/tfts/alice.tft")
 generated_company = parse_format("../LogicalFormatExamples/abridgedTest/tfts/company.tft")
 generated_merged = graph_merge(generated_alice, generated_company)
+
+# Generate legal policy graph
 generated_policy = parse_format("../LogicalFormatExamples/abridgedTest/tfts/policy.tft")
 
 generated_alice.render_graph(output_size = (2000, 1200),
@@ -134,6 +161,7 @@ generated_policy.render_graph(output_size = (2000, 1200),
                         edge_font_size=20,
                         filepath = "../LogicalFormatExamples/abridgedTest/generated/policy.png")
 
+# Define analogous pairings
 company_to_policy_map = {
     "Company": ["Corporation"],
     "Payroll Processor": ["Payor"],
@@ -141,4 +169,5 @@ company_to_policy_map = {
     "Employee Absences": ["Employee Data"]
 }
 
+# Compare company policy to legal policy
 error_list = graph_compare(generated_company, generated_policy, company_to_policy_map)

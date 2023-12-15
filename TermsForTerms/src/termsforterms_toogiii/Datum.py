@@ -1,7 +1,4 @@
 from EntityNode import EntityNode
-from DataSubject import DataSubject
-from DataController import DataController
-from DataProcessor import DataProcessor
 
 # Class representing data nodes in the graph
 class Datum(EntityNode):

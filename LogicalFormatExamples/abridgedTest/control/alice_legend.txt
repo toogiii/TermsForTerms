@@ -3,8 +3,8 @@ Property 1:
 Property 2: 
 	consent control, accuracy, security, restriction of processing, necessity
 Property 3: 
-	transparency, security, contractual obligation, controller authorization, controller compliance, controller notification
 	transparency, security, legal obligation
+	transparency, security, contractual obligation, controller authorization, controller compliance, controller notification
 Property 4: 
 	c, o, n, t, r, a, c, t
 Property 5: 

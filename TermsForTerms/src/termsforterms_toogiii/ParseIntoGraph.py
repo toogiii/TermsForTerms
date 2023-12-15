@@ -96,5 +96,3 @@ def parse_data(data_lines, subjects, controllers, processors, graph):
                 datum.add_p_props(prop_list)
                 for name in processor_names:
                     datum.add_processor(processors[name])
-
-        

@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "termsforterms_toogiii"
+version = "0.0.1"
+authors = [
+  { name="Garv Gaur", email="garv_gaur@brown.edu" },
+]
+description = "TermsForTerms Privacy Policy Graphical Framework"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "graph_tool",
+]
+
+[project.urls]
+Homepage = "https://github.com/toogiii/TermsForTerms"

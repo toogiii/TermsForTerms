@@ -1,4 +1,0 @@
-Todo: 
-    Rewrite GDPR implementation
-    Write Examples
-    Make Package

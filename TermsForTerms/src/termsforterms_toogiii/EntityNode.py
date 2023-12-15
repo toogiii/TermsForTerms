@@ -1,4 +1,3 @@
-from graph_tool.all import *
 from EntityEdge import EntityEdge
 
 # Abstract class representing entities governing data in the graph

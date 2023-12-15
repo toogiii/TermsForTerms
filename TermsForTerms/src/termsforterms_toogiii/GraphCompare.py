@@ -41,7 +41,8 @@ def graph_compare(dgg_toc, dgg_pol, analogous_entity_map={}):
 # Check whether rights and releases on entity_pol are a subset of those specified in entity_toc (compliance)
 def is_compliant(props_list_toc, props_list_pol):
     non_compliant = []
-                
+    
+    # Check that all sets in toc contain provisions of some set in pol
     for props_toc in props_list_toc:
         compliant_set = False
         for props_pol in props_list_pol:
@@ -51,6 +52,7 @@ def is_compliant(props_list_toc, props_list_pol):
             non_compliant.append((props_toc, props_list_pol))
     return non_compliant
 
+# Get properties for edges between analogous vertices
 def get_analogous_edge_props(entity_toc, entity_pol, dgg_toc, dgg_pol, analogous_entity_map):
     v_toc = entity_toc.vertex
     v_pol = entity_pol.vertex
@@ -139,13 +141,13 @@ def graph_merge(dgg_1, dgg_2, name="Merged Graph", purpose="Merging governances 
 
 # Create node in new graph according to analog in previous graph 
 def create_node(node, dgg):
-    if type(node) == Datum:
+    if isinstance(node, Datum):
         return Datum(node.name, dgg)
-    elif type(node) == DataSubject:
+    elif isinstance(node, DataSubject):
         return DataSubject(node.name, dgg)
-    elif type(node) == DataController:
+    elif isinstance(node, DataController):
         return DataController(node.name, dgg)
-    elif type(node) == DataProcessor:
+    elif isinstance(node, DataProcessor):
         return DataProcessor(node.name, dgg)
     else:
         raise Exception("Unrecognized node type.")
