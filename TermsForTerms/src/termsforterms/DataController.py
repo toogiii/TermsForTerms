@@ -1,6 +1,6 @@
-from DataEdge import DataEdge
-from PCEdge import PCEdge
-from EntityNode import EntityNode
+from .DataEdge import DataEdge
+from .PCEdge import PCEdge
+from .EntityNode import EntityNode
 
 # Represents Data Controller
 # A data controller, here, represents a non-subject entity that uses data for a purpose

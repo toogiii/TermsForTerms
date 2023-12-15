@@ -1,5 +1,5 @@
-from DataEdge import DataEdge
-from EntityNode import EntityNode
+from .DataEdge import DataEdge
+from .EntityNode import EntityNode
 
 # Represents Data Subject
 # Here, a Data Subject is an entity who owns data that is collected for some purpose

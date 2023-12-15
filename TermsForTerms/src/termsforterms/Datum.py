@@ -1,4 +1,4 @@
-from EntityNode import EntityNode
+from .EntityNode import EntityNode
 
 # Class representing data nodes in the graph
 class Datum(EntityNode):

@@ -1,4 +1,4 @@
-from EntityEdge import EntityEdge
+from .EntityEdge import EntityEdge
 
 # Class representing an edge between a processor and controller.
 # Note that there is no specification for a SC edge (or subject-controller), as

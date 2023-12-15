@@ -1,9 +1,9 @@
 from graph_tool.all import *
-from DGGraph import DGGraph
-from Datum import Datum
-from DataSubject import DataSubject
-from DataController import DataController
-from DataProcessor import DataProcessor
+from .DGGraph import DGGraph
+from .Datum import Datum
+from .DataSubject import DataSubject
+from .DataController import DataController
+from .DataProcessor import DataProcessor
 
 # This function should be able to compare abstract relationships defined between entities
 #   in policy to definitions at the terms and conditions level, find errors in the specification,

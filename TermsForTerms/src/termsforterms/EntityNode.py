@@ -1,4 +1,4 @@
-from EntityEdge import EntityEdge
+from .EntityEdge import EntityEdge
 
 # Abstract class representing entities governing data in the graph
 class EntityNode:

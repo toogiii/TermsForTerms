@@ -1,10 +1,4 @@
-from DataSubject import DataSubject
-from DataController import DataController
-from DataProcessor import DataProcessor
-from Datum import Datum
-from DGGraph import DGGraph
-from GraphCompare import graph_compare, graph_merge
-from ParseIntoGraph import parse_format
+from termsforterms import *
 
 # Abridged Tests: Graph, Merge, and Compare with Toy Examples
 
@@ -86,7 +80,7 @@ for datum in employee_data:
 alice_graph.render_graph(output_size = (2000, 1200),
                         vertex_font_size=20,
                         edge_font_size=20,                              
-                        filepath = "../LogicalFormatExamples/abridgedTest/control/alice.png")
+                        filepath = "./control/alice.png")
 
 # Control: Create network for franchiser's perspective
 franchise_graph = DGGraph("Ice Cream Parlor Inc.", 
@@ -126,40 +120,40 @@ other_franchise_data.add_controller(franchise_owner)
 franchise_graph.render_graph(output_size = (2000, 1200),
                         vertex_font_size=20,
                         edge_font_size=20,
-                        filepath = "../LogicalFormatExamples/abridgedTest/control/company.png")
+                        filepath = "./control/company.png")
 
 
 # Merge franchiser and franchisee (Alice's) graphs
 merged = graph_merge(alice_graph, franchise_graph)
 
 merged.render_graph(output_size = (2500, 1500),
-                    filepath = "../LogicalFormatExamples/abridgedTest/control/merged.png")
+                    filepath = "./control/merged.png")
 
 # Evaluate generated graphs using .tfts against controls
-generated_alice = parse_format("../LogicalFormatExamples/abridgedTest/tfts/alice.tft")
-generated_company = parse_format("../LogicalFormatExamples/abridgedTest/tfts/company.tft")
+generated_alice = parse_format("./tfts/alice.tft")
+generated_company = parse_format("./tfts/company.tft")
 generated_merged = graph_merge(generated_alice, generated_company)
 
 # Generate legal policy graph
-generated_policy = parse_format("../LogicalFormatExamples/abridgedTest/tfts/policy.tft")
+generated_policy = parse_format("./tfts/policy.tft")
 
 generated_alice.render_graph(output_size = (2000, 1200),
                         vertex_font_size=20,
                         edge_font_size=20,                               
-                        filepath = "../LogicalFormatExamples/abridgedTest/generated/alice.png")
+                        filepath = "./generated/alice.png")
 
 generated_company.render_graph(output_size = (2000, 1200),
                         vertex_font_size=20,
                         edge_font_size=20,
-                        filepath = "../LogicalFormatExamples/abridgedTest/generated/company.png")
+                        filepath = "./generated/company.png")
 
 generated_merged.render_graph(output_size = (2500, 1500),
-                    filepath = "../LogicalFormatExamples/abridgedTest/generated/merged.png")
+                    filepath = "./generated/merged.png")
 
 generated_policy.render_graph(output_size = (2000, 1200),
                         vertex_font_size=20,
                         edge_font_size=20,
-                        filepath = "../LogicalFormatExamples/abridgedTest/generated/policy.png")
+                        filepath = "./generated/policy.png")
 
 # Define analogous pairings
 company_to_policy_map = {

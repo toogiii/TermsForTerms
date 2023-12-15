@@ -1,6 +1,6 @@
 from graph_tool.all import *
-from DataSubject import DataSubject
-from Datum import Datum
+from .DataSubject import DataSubject
+from .Datum import Datum
 
 # Represents data governance graph
 class DGGraph:

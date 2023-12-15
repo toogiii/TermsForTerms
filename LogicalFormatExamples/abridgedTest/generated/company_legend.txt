@@ -5,5 +5,5 @@ Property 2:
 Property 3: 
 	consent, contractual obligation, inform subject of details of processing
 Property 4: 
-	transparency, security, contractual obligation, controller authorization, controller compliance, controller notification
 	legal obligation, security
+	transparency, security, contractual obligation, controller authorization, controller compliance, controller notification

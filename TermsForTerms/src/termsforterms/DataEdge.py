@@ -1,4 +1,4 @@
-from EntityEdge import EntityEdge
+from .EntityEdge import EntityEdge
 
 # Class representing the edge between a datum and a non-datum entity
 class DataEdge(EntityEdge):

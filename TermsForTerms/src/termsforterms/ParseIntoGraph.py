@@ -1,8 +1,8 @@
-from DGGraph import DGGraph
-from DataSubject import DataSubject
-from DataController import DataController
-from DataProcessor import DataProcessor
-from Datum import Datum
+from .DGGraph import DGGraph
+from .DataSubject import DataSubject
+from .DataController import DataController
+from .DataProcessor import DataProcessor
+from .Datum import Datum
 
 # This function includes the methods that allow for translation from the .tft logical format into
 #   the DGG.

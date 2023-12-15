@@ -1,5 +1,5 @@
-from DataEdge import DataEdge
-from EntityNode import EntityNode
+from .DataEdge import DataEdge
+from .EntityNode import EntityNode
 
 # Represents Data Processor
 # Here, a Data Processor represents a body given data by a controller to process over that it
