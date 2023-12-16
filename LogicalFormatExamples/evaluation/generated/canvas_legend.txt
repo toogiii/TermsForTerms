@@ -1,0 +1,26 @@
+Property 1: 
+	necessity, consent control, accuracy, security
+Property 2: 
+	consent control, accuracy, security
+Property 3: 
+	consent control
+Property 4: 
+	contract
+Property 5: 
+	legal obligation, EU-US DPF
+	anonymization, aggregation, consent, EU-US DPF
+Property 6: 
+	non-disclosure
+Property 7: 
+	legal obligation, EU-US DPF
+	anonymization, aggregation, consent, EU-US DPF
+	institution specific contract, SPDA
+Property 8: 
+	institution specific contract, SPDA
+Property 9: 
+	controller consent, consent
+Property 10: 
+	consent
+Property 11: 
+	consent
+	controller consent, consent

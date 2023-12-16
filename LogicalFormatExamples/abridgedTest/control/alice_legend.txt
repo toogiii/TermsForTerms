@@ -6,7 +6,7 @@ Property 3:
 	transparency, security, contractual obligation, controller authorization, controller compliance, controller notification
 	transparency, security, legal obligation
 Property 4: 
-	c, o, n, t, r, a, c, t
+	contract
 Property 5: 
 	consent, contractual obligation, inform subject of details of processing
 Property 6: 

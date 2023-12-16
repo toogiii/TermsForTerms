@@ -33,7 +33,7 @@ class DataController(EntityNode):
             raise Exception("Duplicate processor.")
         
         # Create edge with companion processor
-        processor_edge = PCEdge(self.vertex, processor.vertex, {("contract")}, self.dggraph)
+        processor_edge = PCEdge(self.vertex, processor.vertex, [{("contract")}], self.dggraph)
         self.controlled.add(processor)
         self.controlled_edges.add(processor_edge)
         return processor_edge

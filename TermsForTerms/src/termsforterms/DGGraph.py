@@ -45,7 +45,7 @@ class DGGraph:
         self.edge_props[edge] = edge_obj.props
         self.edges[edge] = edge_obj
         return edge
-    
+
     def get_edge_string(self, edge):
         return "\n\t" + "\n\t".join([", ".join(i) for i in self.edge_props[edge]]) + "\n"
 

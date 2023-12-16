@@ -1,9 +1,9 @@
 Property 1: 
 	consent control, accuracy, security, restriction of processing, necessity, confidentiality
 Property 2: 
-	c, o, n, t, r, a, c, t
+	contract
 Property 3: 
 	consent, contractual obligation
 Property 4: 
-	legal obligation, public health obligation, security
 	transparency, security, contractual obligation, controller authorization, controller compliance, controller notification
+	legal obligation, public health obligation, security

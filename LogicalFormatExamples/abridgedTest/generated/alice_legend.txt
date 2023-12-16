@@ -3,7 +3,7 @@ Property 1:
 Property 2: 
 	consent control, accuracy, security, restriction of processing, necessity
 Property 3: 
-	c, o, n, t, r, a, c, t
+	contract
 Property 4: 
 	consent, contractual obligation, inform subject of details of processing
 Property 5: 
